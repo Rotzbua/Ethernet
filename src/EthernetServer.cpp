@@ -15,7 +15,7 @@ EthernetServer::EthernetServer(uint16_t port)
 
 void EthernetServer::begin()
 {
-  for (int sock = 0; sock < MAX_SOCK_NUM; sock++) {
+  for (uint8_t sock = 0; sock < MAX_SOCK_NUM; sock++) {
     EthernetClient client(sock);
     if (client.status() == SnSR::CLOSED) {
       socket(sock, SnMR::TCP, _port, 0);
@@ -30,7 +30,7 @@ void EthernetServer::accept()
 {
   int listening = 0;
 
-  for (int sock = 0; sock < MAX_SOCK_NUM; sock++) {
+  for (uint8_t sock = 0; sock < MAX_SOCK_NUM; sock++) {
     EthernetClient client(sock);
 
     if (EthernetClass::_server_port[sock] == _port) {
@@ -52,7 +52,7 @@ EthernetClient EthernetServer::available()
 {
   accept();
 
-  for (int sock = 0; sock < MAX_SOCK_NUM; sock++) {
+  for (uint8_t sock = 0; sock < MAX_SOCK_NUM; sock++) {
     EthernetClient client(sock);
     if (EthernetClass::_server_port[sock] == _port) {
       uint8_t s = client.status();
@@ -79,7 +79,7 @@ size_t EthernetServer::write(const uint8_t *buffer, size_t size)
   
   accept();
 
-  for (int sock = 0; sock < MAX_SOCK_NUM; sock++) {
+  for (uint8_t sock = 0; sock < MAX_SOCK_NUM; sock++) {
     EthernetClient client(sock);
 
     if (EthernetClass::_server_port[sock] == _port &&

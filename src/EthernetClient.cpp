@@ -39,7 +39,7 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
   if (_sock != MAX_SOCK_NUM)
     return 0;
 
-  for (int i = 0; i < MAX_SOCK_NUM; i++) {
+  for (uint8_t i = 0; i < MAX_SOCK_NUM; i++) {
     uint8_t s = socketStatus(i);
     if (s == SnSR::CLOSED || s == SnSR::FIN_WAIT || s == SnSR::CLOSE_WAIT) {
       _sock = i;
@@ -152,8 +152,8 @@ uint8_t EthernetClient::connected() {
   if (_sock == MAX_SOCK_NUM) return 0;
 
   uint8_t s = status();
-  return !(s == SnSR::LISTEN || s == SnSR::CLOSED || s == SnSR::FIN_WAIT ||
-    (s == SnSR::CLOSE_WAIT && !available()));
+  return (uint8_t) !(s == SnSR::LISTEN || s == SnSR::CLOSED || s == SnSR::FIN_WAIT ||
+                     (s == SnSR::CLOSE_WAIT && !available()));
 }
 
 uint8_t EthernetClient::status() {
