@@ -313,7 +313,8 @@ public:
 private:
   static const uint8_t  RST = 7; // Reset BIT
 
-  static const int SOCKETS = 4;
+  static const uint8_t SOCKETS = MAX_SOCK_NUM; // Maximum number of sockets
+
   static const uint16_t SMASK = 0x07FF; // Tx buffer MASK
   static const uint16_t RMASK = 0x07FF; // Rx buffer MASK
 public:
